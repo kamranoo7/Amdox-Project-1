@@ -15,7 +15,7 @@ app.listen(process.env.port,async()=>{
     try{
 await connection
 console.log("Connected to DB")
-    }catch{
+    }catch(err){
         console.log(err)
         console.log("Not Connected To DB")
     }

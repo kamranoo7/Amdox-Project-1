@@ -3,12 +3,47 @@ import { Link } from "react-router-dom";
 import authIllustration from "../../assets/Sign-up.svg"; 
 
 function Register() {
-  const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState("seeker");
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevents page reload
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    pass: "",
+    
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const payload = {
+      ...formData,
+      role: role === "seeker" ? "Candidate" : "Employer",
+    };
+  
+    try {
+      const res = await fetch("http://localhost:8080/users/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+  
+      const data = await res.json();
+      alert(data.msg);
+    } catch (error) {
+      console.log(error);
+      alert("Something went wrong");
+    }
+  };
+  
+  
+    
 
   return (
     
@@ -76,6 +111,9 @@ function Register() {
                   <label className="form-label fw-semibold mb-1 text-dark small">Full Name</label>
                   <input
                     type="text"
+                    name="name"
+  value={formData.name}
+  onChange={handleChange}
                     className="form-control py-2 shadow-none border-light-subtle"
                     placeholder="Enter Full name"
                   />
@@ -87,6 +125,9 @@ function Register() {
                     type="email"
                     className="form-control py-2 shadow-none border-light-subtle"
                     placeholder="Enter Email address"
+                    name="email"
+  value={formData.email}
+  onChange={handleChange}
                   />
                 </div>
 
@@ -94,6 +135,9 @@ function Register() {
                   <label className="form-label fw-semibold mb-1 text-dark small">Password</label>
                   <div className="input-group">
                     <input
+                    name="pass"
+                    value={formData.pass}
+                    onChange={handleChange}
                       type={showPassword ? "text" : "password"}
                       className="form-control py-2 shadow-none border-end-0 border-light-subtle"
                       placeholder="Enter Password"
