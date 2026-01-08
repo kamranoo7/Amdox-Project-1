@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import authIllustration from "../../assets/Login.svg";
 
 function Login() {
-  
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
@@ -11,18 +10,15 @@ function Login() {
   };
 
   return (
-  
     <div className="min-vh-100 d-flex justify-content-center align-items-center bg-light p-3">
-  
       <div
         className="card border-0 shadow-lg rounded-4 overflow-hidden w-100"
         style={{ maxWidth: "1000px", minHeight: "600px" }}
       >
         <div className="row g-0">
-  
           <div
             className="col-md-6 d-none d-md-flex align-items-center justify-content-center p-5"
-            style={{ backgroundColor: "#f8f9fa" }} 
+            style={{ backgroundColor: "#f8f9fa" }}
           >
             <div className="text-center">
               <img
@@ -44,7 +40,8 @@ function Login() {
               <div className="mb-4 text-start">
                 <h2 className="fw-bold text-dark">Welcome Back!👋</h2>
                 <p className="text-secondary medium">
-                  Please sign in to access your dashboard and latest opportunities.
+                  Please sign in to access your dashboard and latest
+                  opportunities.
                 </p>
               </div>
 
@@ -61,7 +58,9 @@ function Login() {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label fw-semibold mb-1 text-dark small">Password</label>
+                  <label className="form-label fw-semibold mb-1 text-dark small">
+                    Password
+                  </label>
                   <div className="input-group">
                     <input
                       type={showPassword ? "text" : "password"}
@@ -73,7 +72,11 @@ function Login() {
                       style={{ cursor: "pointer" }}
                       onClick={() => setShowPassword(!showPassword)}
                     >
-                      <i className={`bi ${showPassword ? "bi-eye" : "bi-eye-slash"}`}></i>
+                      <i
+                        className={`bi ${
+                          showPassword ? "bi-eye" : "bi-eye-slash"
+                        }`}
+                      ></i>
                     </span>
                   </div>
                 </div>
@@ -120,36 +123,48 @@ function Login() {
 
                 {/* --- SOCIAL ICONS --- */}
                 <div className="d-flex justify-content-center gap-3">
-                  
                   {/* Google */}
-                  <button 
-                    type="button" 
-                    className="btn btn-light rounded-circle d-flex align-items-center justify-content-center shadow-sm border-0 transition-all"
-                    style={{ width: "45px", height: "45px", backgroundColor: "#fff" }}
+                  <button
+                    type="button"
+                    className="btn btn-light rounded-circle d-flex align-items-center justify-content-center shadow-sm border-0 transition-all social-btn social-google"
+                    style={{
+                      width: "45px",
+                      height: "45px",
+                      backgroundColor: "#fff",
+                    }}
+                    aria-label="Sign in with Google"
                   >
                     <i className="bi bi-google text-danger fs-5"></i>
                   </button>
 
                   {/* LinkedIn */}
-                  <button 
-                    type="button" 
-                    className="btn btn-light rounded-circle d-flex align-items-center justify-content-center shadow-sm border-0 transition-all"
-                    style={{ width: "45px", height: "45px", backgroundColor: "#fff" }}
+                  <button
+                    type="button"
+                    className="btn btn-light rounded-circle d-flex align-items-center justify-content-center shadow-sm border-0 transition-all social-btn social-linkedin"
+                    style={{
+                      width: "45px",
+                      height: "45px",
+                      backgroundColor: "#fff",
+                    }}
+                    aria-label="Sign in with LinkedIn"
                   >
                     <i className="bi bi-linkedin text-primary fs-5"></i>
                   </button>
 
                   {/* GitHub */}
-                  <button 
-                    type="button" 
-                    className="btn btn-light rounded-circle d-flex align-items-center justify-content-center shadow-sm border-0 transition-all"
-                    style={{ width: "45px", height: "45px", backgroundColor: "#fff" }}
+                  <button
+                    type="button"
+                    className="btn btn-light rounded-circle d-flex align-items-center justify-content-center shadow-sm border-0 transition-all social-btn social-github"
+                    style={{
+                      width: "45px",
+                      height: "45px",
+                      backgroundColor: "#fff",
+                    }}
+                    aria-label="Sign in with GitHub"
                   >
                     <i className="bi bi-github text-dark fs-5"></i>
                   </button>
-
                 </div>
-
               </form>
 
               <div className="text-center mt-4">
