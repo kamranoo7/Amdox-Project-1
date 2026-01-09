@@ -54,6 +54,9 @@ function Login() {
                     type="email"
                     className="form-control py-2 shadow-none border-light-subtle"
                     placeholder="Enter Email Address"
+                    required
+                    pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
+                    title="Please enter a valid email address (e.g., user@example.com)."
                   />
                 </div>
 
@@ -66,6 +69,9 @@ function Login() {
                       type={showPassword ? "text" : "password"}
                       className="form-control py-2 shadow-none border-end-0 border-light-subtle"
                       placeholder="Enter Password"
+                      required
+                      pattern=".{6,}"
+                      title="Password must be at least 6 characters."
                     />
                     <span
                       className="input-group-text bg-white border-start-0 border-light-subtle text-secondary"
@@ -187,3 +193,4 @@ function Login() {
 }
 
 export default Login;
+
