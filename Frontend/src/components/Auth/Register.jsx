@@ -111,6 +111,9 @@ function Register() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
+                    required
+                    pattern="[A-Za-z ]{3,}"
+                    title="Name should be at least 3 letters and contain no numbers and special characters."
                     className="form-control py-2 shadow-none border-light-subtle"
                     placeholder="Enter Full name"
                   />
@@ -127,6 +130,9 @@ function Register() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
+                    required
+                    pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
+                    title="Please enter a valid email address (e.g., user@example.com)."
                   />
                 </div>
 
@@ -139,6 +145,9 @@ function Register() {
                       name="pass"
                       value={formData.pass}
                       onChange={handleChange}
+                      required
+                      pattern=".{6,}"
+                      title="Password must be at least 6 characters."
                       type={showPassword ? "text" : "password"}
                       className="form-control py-2 shadow-none border-end-0 border-light-subtle"
                       placeholder="Enter Password"
