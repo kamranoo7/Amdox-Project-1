@@ -113,7 +113,7 @@ function Register() {
                     onChange={handleChange}
                     required
                     pattern="[A-Za-z ]{3,}"
-                    title="Name should be at least 3 letters and contain no numbers and special characters."
+                    title="Please enter at least 3 letters."
                     className="form-control py-2 shadow-none border-light-subtle"
                     placeholder="Enter Full name"
                   />
@@ -267,3 +267,4 @@ function Register() {
 }
 
 export default Register;
+
