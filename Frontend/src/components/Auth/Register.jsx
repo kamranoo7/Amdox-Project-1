@@ -83,20 +83,22 @@ function Register() {
               <div className="d-flex gap-2 mb-4">
                 <button
                   type="button"
-                  className={`btn btn-sm w-50 py-2 fw-bold shadow-sm ${
+                  className={`btn btn-sm w-50 py-2 fw-bold shadow-sm d-flex align-items-center justify-content-center gap-2 ${
                     role === "seeker" ? "btn-primary" : "btn-outline-primary"
                   }`}
                   onClick={() => setRole("seeker")}
                 >
+                  <i className="bi bi-person-fill"></i>
                   Job Seeker
                 </button>
                 <button
                   type="button"
-                  className={`btn btn-sm w-50 py-2 fw-bold shadow-sm ${
+                  className={`btn btn-sm w-50 py-2 fw-bold shadow-sm d-flex align-items-center justify-content-center gap-2 ${
                     role === "employer" ? "btn-primary" : "btn-outline-primary"
                   }`}
                   onClick={() => setRole("employer")}
                 >
+                  <i className="bi bi-briefcase-fill"></i>
                   Employer
                 </button>
               </div>
@@ -267,4 +269,3 @@ function Register() {
 }
 
 export default Register;
-
