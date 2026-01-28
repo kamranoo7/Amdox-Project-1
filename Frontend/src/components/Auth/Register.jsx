@@ -42,7 +42,7 @@ function Register() {
   };
 
   return (
-    <div className="min-vh-100 d-flex justify-content-center align-items-center bg-light p-3">
+    <div className="min-vh-100 d-flex justify-content-center align-items-center bg-light p-3 bg-gradient-primary">
       <div
         className="card border-0 shadow-lg rounded-4 overflow-hidden w-100"
         style={{ maxWidth: "1000px", minHeight: "600px" }}
@@ -161,7 +161,7 @@ function Register() {
                     >
                       <i
                         className={`bi ${
-                          showPassword ? "bi-eye" : "bi-eye-slash"
+                          showPassword ? "bi-eye-slash" : "bi-eye"
                         }`}
                       ></i>
                     </span>
