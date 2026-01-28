@@ -1,16 +1,82 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import authIllustration from "../../assets/Login.svg";
 
 function Login() {
-  const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
+  // --- STATE ---
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  // --- TOAST STATE ---
+  const [showToast, setShowToast] = useState(false); // Initially False
+  const [toastMessage, setToastMessage] = useState("");
+
+  // --- HARDCODED CREDENTIALS ---
+  const staticEmail = "jobseeker@gmail.com";
+  const staticPassword = "jobseeker123";
+  const staticAdminEmail = "admin@gmail.com";
+  const staticAdminPassword = "admin123";
+
+  // --- HANDLER ---
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevents page reload
+    e.preventDefault();
+    setError("");
+
+    if (email === staticEmail && password === staticPassword) {
+      
+      setToastMessage("Login successful! Welcome back job seeker.");
+      setShowToast(true); 
+
+      // Redirect after 2 seconds
+      setTimeout(() => {
+        setShowToast(false);
+        navigate("/dashboard");
+      }, 2000);
+    } else if (email === staticAdminEmail && password === staticAdminPassword) {
+      
+      setToastMessage("Login successful! Welcome back admin.");
+      setShowToast(true); 
+
+      // Redirect after 2 seconds
+      setTimeout(() => {
+        setShowToast(false);
+        navigate("/employer-dashboard");
+      }, 2000);
+    } else {
+      setError("Invalid email or password. Please try again.");
+    }
   };
 
   return (
-    <div className="min-vh-100 d-flex justify-content-center align-items-center bg-light p-3">
+    <div className="min-vh-100 d-flex justify-content-center align-items-center bg-light p-3 bg-gradient-primary position-relative">
+      
+      {showToast && (
+        <div
+          className="toast-container position-fixed top-0 end-0 p-3"
+          style={{ zIndex: 1060 }}
+        >
+          
+          <div className="toast show toast-slide-in align-items-center text-white bg-success border-0 shadow-lg">
+            <div className="d-flex">
+              <div className="toast-body fw-bold">
+                <i className="bi bi-check-circle-fill me-2"></i>
+                {toastMessage}
+              </div>
+              <button
+                type="button"
+                className="btn-close btn-close-white me-2 m-auto"
+                onClick={() => setShowToast(false)}
+                aria-label="Close"
+              ></button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div
         className="card border-0 shadow-lg rounded-4 overflow-hidden w-100"
         style={{ maxWidth: "1000px", minHeight: "600px" }}
@@ -45,6 +111,13 @@ function Login() {
                 </p>
               </div>
 
+              {/* Error Message Display */}
+              {error && (
+                <div className="alert alert-danger py-2 small border-0 shadow-sm mb-3">
+                  {error}
+                </div>
+              )}
+
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label className="form-label fw-semibold mb-1 text-dark small">
@@ -57,6 +130,8 @@ function Login() {
                     required
                     pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"
                     title="Please enter a valid email address (e.g., user@example.com)."
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
 
@@ -72,6 +147,8 @@ function Login() {
                       required
                       pattern=".{6,}"
                       title="Password must be at least 6 characters."
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                     <span
                       className="input-group-text bg-white border-start-0 border-light-subtle text-secondary"
@@ -80,7 +157,7 @@ function Login() {
                     >
                       <i
                         className={`bi ${
-                          showPassword ? "bi-eye" : "bi-eye-slash"
+                          showPassword ? "bi-eye-slash" : "bi-eye"
                         }`}
                       ></i>
                     </span>
@@ -193,4 +270,3 @@ function Login() {
 }
 
 export default Login;
-
