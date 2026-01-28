@@ -15,39 +15,53 @@ function Login() {
   const [showToast, setShowToast] = useState(false); // Initially False
   const [toastMessage, setToastMessage] = useState("");
 
-  // --- HARDCODED CREDENTIALS ---
-  const staticEmail = "jobseeker@gmail.com";
-  const staticPassword = "jobseeker123";
-  const staticAdminEmail = "admin@gmail.com";
-  const staticAdminPassword = "admin123";
-
   // --- HANDLER ---
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     setError("");
 
-    if (email === staticEmail && password === staticPassword) {
-      
-      setToastMessage("Login successful! Welcome back job seeker.");
-      setShowToast(true); 
+   try {
+      // 1. Call the Backend API
+      let response = await fetch("http://localhost:8080/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, pass: password }), // Note: backend expects 'pass'
+      });
 
-      // Redirect after 2 seconds
-      setTimeout(() => {
-        setShowToast(false);
-        navigate("/dashboard");
-      }, 2000);
-    } else if (email === staticAdminEmail && password === staticAdminPassword) {
-      
-      setToastMessage("Login successful! Welcome back admin.");
-      setShowToast(true); 
+      let data = await response.json();
 
-      // Redirect after 2 seconds
-      setTimeout(() => {
-        setShowToast(false);
-        navigate("/employer-dashboard");
-      }, 2000);
-    } else {
-      setError("Invalid email or password. Please try again.");
+      if (response.ok) {
+        // 2. Login Success
+        
+        // Save Token and Role to LocalStorage (Browser Memory)
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("role", data.role);
+        localStorage.setItem("name", data.name);
+
+        setToastMessage("Login successful! Redirecting...");
+        setShowToast(true);
+
+        // 3. Redirect based on Role after a short delay
+        setTimeout(() => {
+          setShowToast(false);
+          
+          if (data.role === "Employer") {
+            navigate("/employer-dashboard");
+          } else {
+            // Default to Seeker dashboard
+            navigate("/dashboard");
+          }
+        }, 2000);
+
+      } else {
+        // 4. Login Failed (Wrong password or User not found)
+        setError(data.msg || "Invalid credentials");
+      }
+    } catch (err) {
+      console.log(err);
+      setError("Something went wrong. Please check your server connection.");
     }
   };
 
