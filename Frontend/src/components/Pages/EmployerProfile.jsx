@@ -215,7 +215,7 @@ const EmployerProfile = () => {
                     </div>
                     <div className="col-md-6">
                       <label className="form-label small text-secondary fw-bold">
-                        Industry
+                        Industry <span className="text-danger">*</span>
                       </label>
                       <select
                         className="form-select bg-light border-0"
@@ -246,7 +246,7 @@ const EmployerProfile = () => {
                     </div>
                     <div className="col-md-6">
                       <label className="form-label small text-secondary fw-bold">
-                        Company Size
+                        Company Size <span className="text-danger">*</span>
                       </label>
                       <select
                         className="form-select bg-light border-0"
