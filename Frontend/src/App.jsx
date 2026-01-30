@@ -5,6 +5,7 @@ import Dashboard from "./Pages/Dashboard.jsx";
 import EmployerDashboard from "./Pages/EmployerDashboard.jsx";  
 import EmployerProfile from "./Pages/EmployerProfile.jsx";
 import Profile from "./Pages/Profiles.jsx";
+import ManageJobs from "./Pages/ManageJobs.jsx";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/employer-dashboard" element={<EmployerDashboard />} />
         <Route path="/employer-profile" element={<EmployerProfile />} />
         <Route path="/Profile" element={<Profile />} />
+        <Route path="/employer/jobs" element={<ManageJobs />} />
       </Routes>
     </div>
   );
